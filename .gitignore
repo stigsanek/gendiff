@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+
+.venv/
+
+dist/
+
+.pytest_cache/
+
+.coverage
