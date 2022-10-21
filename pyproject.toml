@@ -5,11 +5,13 @@ description = "gendiff"
 authors = ["stigsanek <stigsanek@yandex.ru>"]
 repository = "https://github.com/stigsanek/python-project-50"
 readme = "README.md"
-packages = [{include = "hexlet_code"}]
+packages = [{include = "gendiff"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 
+[tool.poetry.scripts]
+gendiff = "gendiff.scripts.gendiff:main"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^5.0.4"
