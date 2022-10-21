@@ -1,4 +1,6 @@
-from gendiff.utils import read_file, parse_json
+import json
+
+from gendiff.utils import read_file, sort_dict
 
 
 def generate_diff(first_file: str, second_file: str) -> str:
@@ -9,5 +11,6 @@ def generate_diff(first_file: str, second_file: str) -> str:
     :param second_file: path to second file
     :return: str
     """
-    dict_first = parse_json(read_file(first_file))
-    dict_second = parse_json(read_file(second_file))
+    dict_first = sort_dict(json.loads(read_file(first_file)))
+    dict_second = sort_dict(json.loads(read_file(second_file)))
+    pass

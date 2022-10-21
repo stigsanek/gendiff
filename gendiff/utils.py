@@ -1,4 +1,3 @@
-import json
 from collections import OrderedDict
 
 
@@ -13,12 +12,21 @@ def read_file(file_path: str) -> str:
         return f.read()
 
 
-def parse_json(json_str: str) -> OrderedDict:
+def sort_dict(dictionary: dict) -> OrderedDict:
     """
-    Parse json string and return OrderedDict
+    Sort dictionary recursively by key name
 
-    :param json_str:
-    :return: dict
+    :param dictionary: unsorted dictionary
+    :return: OrderedDict
     """
-    dict_data = json.loads(json_str)
-    return OrderedDict(sorted(dict_data.items(), key=lambda t: t[0]))
+    od = OrderedDict()
+
+    for key, value in sorted(dictionary.items(), key=lambda t: t[0]):
+        if isinstance(value, dict):
+            od[key] = sort_dict(value)
+        elif isinstance(value, list):
+            od[key] = list(map(sort_dict, value))
+        else:
+            od[key] = value
+
+    return od

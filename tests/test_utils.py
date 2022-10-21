@@ -1,16 +1,87 @@
 import json
 
-from gendiff.utils import parse_json
+import pytest
+
+from gendiff.utils import sort_dict
 
 
-def test_parse_json():
+@pytest.fixture
+def unsorted_dict() -> dict:
     """
-    Test for parse_json function
+    Fixture unsorted dictionary
+
+    :return: dict
+    """
+    return {
+        "host": "hexlet.io",
+        "timeout": 50,
+        "proxy": "123.234.53.22",
+        "follow": False,
+        "other": {
+            "host": "hexlet.io",
+            "timeout": 50,
+            "proxy": "123.234.53.22",
+            "follow": False
+        },
+        "list": [
+            {
+                "host": "hexlet.io",
+                "timeout": 50,
+                "proxy": "123.234.53.22",
+                "follow": False
+            },
+            {
+                "host": "hexlet.io",
+                "timeout": 50,
+                "proxy": "123.234.53.22",
+                "follow": False
+            }
+        ]
+    }
+
+
+@pytest.fixture
+def sorted_dict() -> dict:
+    """
+    Fixture sorted dictionary
+
+    :return: dict
+    """
+    return {
+        "follow": False,
+        "host": "hexlet.io",
+        "list": [
+            {
+                "follow": False,
+                "host": "hexlet.io",
+                "proxy": "123.234.53.22",
+                "timeout": 50
+            },
+            {
+                "follow": False,
+                "host": "hexlet.io",
+                "proxy": "123.234.53.22",
+                "timeout": 50
+            }
+        ],
+        "other": {
+            "follow": False,
+            "host": "hexlet.io",
+            "proxy": "123.234.53.22",
+            "timeout": 50
+        },
+        "proxy": "123.234.53.22",
+        "timeout": 50
+    }
+
+
+def test_sort_dict(unsorted_dict, sorted_dict):
+    """
+    Test for sort_dict function
 
     :return:
     """
-    json_in = '{"timeout": 50, "host": "hexlet.io", "follow": false}'
-    json_out = '{"follow": false, "host": "hexlet.io", "timeout": 50}'
-    result = parse_json(json_in)
+    in_json = json.dumps(sort_dict(unsorted_dict))
+    out_json = json.dumps(sorted_dict)
 
-    assert json.dumps(result) == json_out
+    assert in_json == out_json
