@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from gendiff.diff import get_diff
+from gendiff.views import to_json
 
 
 def read_file(path: str) -> dict:
@@ -28,3 +29,4 @@ def generate_diff(first_file: str, second_file: str) -> str:
     first = read_file(first_file)
     second = read_file(second_file)
     diff = get_diff(first, second)
+    return to_json(diff)

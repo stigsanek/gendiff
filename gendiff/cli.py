@@ -1,11 +1,11 @@
 import argparse
 
 
-def create_args_parser() -> argparse.ArgumentParser:
+def get_args() -> argparse.Namespace:
     """
-    Create arguments parser object
+    Return arguments
 
-    :return: argparse.ArgumentParser
+    :return: argparse.Namespace
     """
     parser = argparse.ArgumentParser(
         description="Compares two configuration files and shows a difference."
@@ -13,4 +13,4 @@ def create_args_parser() -> argparse.ArgumentParser:
     parser.add_argument("-f", "--format", help="set format of output")
     parser.add_argument("first_file")
     parser.add_argument("second_file")
-    return parser
+    return parser.parse_args()

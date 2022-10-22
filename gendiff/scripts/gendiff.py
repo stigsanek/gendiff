@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-from gendiff.cli import create_args_parser
+from gendiff.cli import get_args
+from gendiff.main import generate_diff
 
 
 def main():
     """
-    Main function
+    Entry point
 
     :return:
     """
-    parser = create_args_parser()
-    args = parser.parse_args()
+    args = get_args()
+    result = generate_diff(
+        first_file=args.first_file,
+        second_file=args.second_file
+    )
+    print(result)
 
 
 if __name__ == "__main__":
