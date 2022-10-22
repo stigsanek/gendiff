@@ -9,6 +9,7 @@ def read_file(path: str) -> dict:
     """
     Read file and returns dictionary
 
+    :param path: file path
     :return: dict
     """
     file = Path(path).resolve()
