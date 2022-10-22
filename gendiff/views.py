@@ -4,13 +4,12 @@ from collections import OrderedDict
 from gendiff import diff
 
 
-def to_json(data: OrderedDict, indent: int = 2) -> str:
+def format_diff_to_dict(data: OrderedDict) -> OrderedDict:
     """
-    Convert diff data to json format
+    Format diff data to dictionary
 
     :param data: diff data
-    :param indent: (optional) indent
-    :return: str
+    :return: OrderedDict
     """
     od = OrderedDict()
 
@@ -28,8 +27,20 @@ def to_json(data: OrderedDict, indent: int = 2) -> str:
             od[deleted_k] = values[0]
             od[added_k] = values[1]
         elif status == diff.NESTED:
-            od[k] = to_json(values[0])
+            od[k] = format_diff_to_dict(values[0])
         else:
             od[k] = values[0]
 
-    return json.dumps(od, indent=indent, default=str).replace('"', "")
+    return od
+
+
+def get_json_view(data: OrderedDict, indent: int = 2) -> str:
+    """
+    Convert diff data to json format
+
+    :param data: diff data
+    :param indent: (optional) indent
+    :return: str
+    """
+    format_data = format_diff_to_dict(data)
+    return json.dumps(format_data, indent=indent).replace('"', "")
