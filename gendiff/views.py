@@ -19,6 +19,7 @@ def format_diff_to_dict(data: OrderedDict) -> OrderedDict:
 
         added_k = f"+ {k}"
         deleted_k = f"- {k}"
+        unchanged_k = f"  {k}"
 
         if status == diff.ADDED:
             od[added_k] = values[0]
@@ -28,9 +29,9 @@ def format_diff_to_dict(data: OrderedDict) -> OrderedDict:
             od[deleted_k] = values[0]
             od[added_k] = values[1]
         elif status == diff.NESTED:
-            od[k] = format_diff_to_dict(values[0])
+            od[unchanged_k] = format_diff_to_dict(values[0])
         else:
-            od[k] = values[0]
+            od[unchanged_k] = values[0]
 
     return od
 
@@ -44,4 +45,5 @@ def get_json_view(data: OrderedDict, indent: int = 2) -> str:
     :return: str
     """
     format_data = format_diff_to_dict(data)
-    return json.dumps(format_data, indent=indent).replace('"', "")
+    json_str = json.dumps(format_data, indent=indent)
+    return json_str.replace('"', "").replace(",", "")

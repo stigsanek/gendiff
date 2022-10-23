@@ -1,8 +1,13 @@
 from collections import OrderedDict
+from pathlib import Path
 
 import pytest
 
 from gendiff import diff
+from gendiff.main import generate_diff
+
+FIXTURES = Path(__file__).parent / "fixtures"
+SIMPLE = FIXTURES / "simple"
 
 
 @pytest.fixture
@@ -61,3 +66,21 @@ def test_get_diff(first_dict, second_dict, result_dict):
     :return:
     """
     assert diff.get_diff(first_dict, second_dict) == result_dict
+
+
+@pytest.mark.parametrize("path", [SIMPLE])
+def test_generate_diff(path):
+    """
+    Test for generate_diff function
+
+    :return:
+    """
+    with open(file=path / "result.txt", encoding="utf-8") as f:
+        expected = f.read().strip()
+
+    got = generate_diff(
+        first_file=str(path / "first.json"),
+        second_file=str(path / "second.json")
+    )
+
+    assert got == expected

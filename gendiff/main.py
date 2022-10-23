@@ -14,7 +14,7 @@ def read_file(path: str) -> dict:
     """
     file = Path(path).resolve()
 
-    with open(file=file, mode="r", encoding="utf-8") as f:
+    with open(file=file, encoding="utf-8") as f:
         if file.suffix == '.json':
             return json.load(f)
 
