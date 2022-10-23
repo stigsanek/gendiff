@@ -14,7 +14,8 @@ def format_diff_to_dict(data: OrderedDict) -> OrderedDict:
     od = OrderedDict()
 
     for k, v in data.items():
-        status, *values = v
+        status = diff.get_status(diff=data, key=k)
+        values = diff.get_values(diff=data, key=k)
 
         added_k = f"+ {k}"
         deleted_k = f"- {k}"

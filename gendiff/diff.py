@@ -41,3 +41,27 @@ def get_diff(first: dict, second: dict) -> OrderedDict:
             diff[key] = (CHANGED, first[key], second[key])
 
     return OrderedDict(sorted(diff.items(), key=lambda t: t[0]))
+
+
+def get_values(diff: OrderedDict, key: str) -> list:
+    """
+    Get value from diff data by key
+
+    :param diff: diff data
+    :param key: key in diff data
+    :return: list
+    """
+    _, *values = diff[key]
+    return values
+
+
+def get_status(diff: OrderedDict, key: str) -> str:
+    """
+    Get status for value diff data by key
+
+    :param diff: diff data
+    :param key: key in diff data
+    :return: str
+    """
+    status, *_ = diff[key]
+    return status
