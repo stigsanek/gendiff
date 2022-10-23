@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+import yaml
+
 from gendiff.diff import get_diff
 from gendiff.views import get_json_view
 
@@ -17,6 +19,8 @@ def read_file(path: str) -> dict:
     with open(file=file, encoding="utf-8") as f:
         if file.suffix == '.json':
             return json.load(f)
+        if file.suffix in [".yml", ".yaml"]:
+            return yaml.safe_load(f)
 
 
 def generate_diff(first_file: str, second_file: str) -> str:
