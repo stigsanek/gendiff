@@ -2,6 +2,12 @@ from collections import OrderedDict
 
 from gendiff import diff
 
+status_maps = {
+    diff.UNCHANGED: "{ind}  {key}:{ak}{val}\n",
+    diff.ADDED: "{ind}+ {key}:{ak}{val}\n",
+    diff.DELETED: "{ind}- {key}:{ak}{val}\n"
+}
+
 
 def get_ind_after_key(value) -> str:
     """
@@ -64,21 +70,21 @@ def get_all_values(data: OrderedDict, depth: int = 1) -> list:
             temp.append(f"{ind}  {k}: " + "{\n")
             temp += get_all_values(values[0], inner_depth)
             temp.append(f"{ind}  " + "}\n")
-        if status == diff.CHANGED:
+        elif status == diff.CHANGED:
             first = get_item_value(values[0], inner_depth)
             second = get_item_value(values[1], inner_depth)
-            before = f"{ind}- {k}:{get_ind_after_key(first)}{first}\n"
-            after = f"{ind}+ {k}:{get_ind_after_key(second)}{second}\n"
+            before = status_maps[diff.DELETED].format(
+                ind=ind, key=k, ak=get_ind_after_key(first), val=first
+            )
+            after = status_maps[diff.ADDED].format(
+                ind=ind, key=k, ak=get_ind_after_key(second), val=second
+            )
             temp.append(before + after)
-        if status == diff.UNCHANGED:
+        else:
             val = get_item_value(values[0], inner_depth)
-            temp.append(f"{ind}  {k}:{get_ind_after_key(val)}{val}\n")
-        if status == diff.ADDED:
-            val = get_item_value(values[0], inner_depth)
-            temp.append(f"{ind}+ {k}:{get_ind_after_key(val)}{val}\n")
-        if status == diff.DELETED:
-            val = get_item_value(values[0], inner_depth)
-            temp.append(f"{ind}- {k}:{get_ind_after_key(val)}{val}\n")
+            temp.append(status_maps[status].format(
+                ind=ind, key=k, ak=get_ind_after_key(val), val=val
+            ))
 
     return temp
 
