@@ -23,7 +23,11 @@ def read_file(path: str) -> dict:
             return yaml.safe_load(f)
 
 
-def generate_diff(first_file: str, second_file: str, out_format: str) -> str:
+def generate_diff(
+        first_file: str,
+        second_file: str,
+        out_format: str = "stylish"
+) -> str:
     """
     Compares two configuration files and return result string
 
