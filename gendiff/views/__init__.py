@@ -1,9 +1,10 @@
 from collections import OrderedDict
 
-from gendiff.views import stylish
+from gendiff.views import stylish, plain
 
 VIEWS = {
-    "stylish": stylish
+    "stylish": stylish,
+    "plain": plain
 }
 
 
