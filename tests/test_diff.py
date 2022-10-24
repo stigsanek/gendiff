@@ -59,3 +59,29 @@ def test_generate_diff_plain(path):
 
     assert got_json == expected
     assert got_yml == expected
+
+
+@pytest.mark.parametrize("path", [SIMPLE, NESTED])
+def test_generate_diff_json(path):
+    """
+    Test for generate_diff function by format 'json'
+
+    :return:
+    """
+    with open(file=path / "result_json.txt", encoding="utf-8") as f:
+        expected = f.read().strip()
+
+    got_json = generate_diff(
+        first_file=str(path / "first.json"),
+        second_file=str(path / "second.json"),
+        out_format="json"
+    )
+
+    got_yml = generate_diff(
+        first_file=str(path / "first.yml"),
+        second_file=str(path / "second.yml"),
+        out_format="json"
+    )
+
+    assert got_json == expected
+    assert got_yml == expected
