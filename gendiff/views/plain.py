@@ -54,10 +54,8 @@ def get_all_values(data: OrderedDict, path: str = "") -> list:
         elif status == diff.UNCHANGED:
             continue
         else:
-            temp.append(TEMPLATE.format(
-                f"{path}{k}",
-                status_maps[status].format(*format_values(values))
-            ))
+            value = status_maps[status].format(*format_values(values))
+            temp.append(TEMPLATE.format(f"{path}{k}", value))
 
     return temp
 
