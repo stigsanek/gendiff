@@ -3,6 +3,17 @@ from collections import OrderedDict
 from gendiff import diff
 
 
+def get_ind_after_key(value) -> str:
+    """
+    Get space if value otherwise empty string.
+    Used to render dictionary values in case of an empty value.
+
+    :param value: value
+    :return: str
+    """
+    return " " if value else ""
+
+
 def get_item_value(value, indent: int) -> str:
     """
     Get string data for item value
@@ -15,11 +26,13 @@ def get_item_value(value, indent: int) -> str:
         ind = "  " * indent
         end_bracket = "  " * (indent - 1)
         temp = []
+
         for k, v in value.items():
             if isinstance(v, dict):
                 temp.append(f"{ind}  {k}: {get_item_value(v, indent + 2)}\n")
             else:
-                temp.append(f"{ind}  {k}: {v}\n")
+                temp.append(f"{ind}  {k}:{get_ind_after_key(v)}{v}\n")
+
         return "{\n" + f"{''.join(temp)}{end_bracket}" + "}"
 
     if isinstance(value, bool):
@@ -52,18 +65,20 @@ def get_all_values(data: OrderedDict, depth: int = 1) -> list:
             temp += get_all_values(values[0], inner_depth)
             temp.append(f"{ind}  " + "}\n")
         if status == diff.CHANGED:
-            before = f"{ind}- {k}: {get_item_value(values[0], inner_depth)}\n"
-            after = f"{ind}+ {k}: {get_item_value(values[1], inner_depth)}\n"
+            first = get_item_value(values[0], inner_depth)
+            second = get_item_value(values[1], inner_depth)
+            before = f"{ind}- {k}:{get_ind_after_key(first)}{first}\n"
+            after = f"{ind}+ {k}:{get_ind_after_key(second)}{second}\n"
             temp.append(before + after)
         if status == diff.UNCHANGED:
-            value = get_item_value(values[0], inner_depth)
-            temp.append(f"{ind}  {k}: {value}\n")
+            val = get_item_value(values[0], inner_depth)
+            temp.append(f"{ind}  {k}:{get_ind_after_key(val)}{val}\n")
         if status == diff.ADDED:
-            value = get_item_value(values[0], inner_depth)
-            temp.append(f"{ind}+ {k}: {value}\n")
+            val = get_item_value(values[0], inner_depth)
+            temp.append(f"{ind}+ {k}:{get_ind_after_key(val)}{val}\n")
         if status == diff.DELETED:
-            value = get_item_value(values[0], inner_depth)
-            temp.append(f"{ind}- {k}: {value}\n")
+            val = get_item_value(values[0], inner_depth)
+            temp.append(f"{ind}- {k}:{get_ind_after_key(val)}{val}\n")
 
     return temp
 

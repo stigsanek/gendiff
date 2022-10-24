@@ -8,6 +8,7 @@ from gendiff.main import generate_diff
 
 FIXTURES = Path(__file__).parent / "fixtures"
 SIMPLE = FIXTURES / "simple"
+NESTED = FIXTURES / "nested"
 
 
 @pytest.fixture
@@ -68,7 +69,7 @@ def test_get_diff(first_dict, second_dict, result_dict):
     assert diff.get_diff(first_dict, second_dict) == result_dict
 
 
-@pytest.mark.parametrize("path", [SIMPLE])
+@pytest.mark.parametrize("path", [SIMPLE, NESTED])
 def test_generate_diff_json(path):
     """
     Test for generate_diff function
@@ -86,7 +87,7 @@ def test_generate_diff_json(path):
     assert got == expected
 
 
-@pytest.mark.parametrize("path", [SIMPLE])
+@pytest.mark.parametrize("path", [SIMPLE, NESTED])
 def test_generate_diff_yml(path):
     """
     Test for generate_diff function
