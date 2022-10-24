@@ -3,21 +3,10 @@ from collections import OrderedDict
 from gendiff import diff
 
 status_maps = {
-    diff.UNCHANGED: "{ind}  {key}:{ak}{val}\n",
-    diff.ADDED: "{ind}+ {key}:{ak}{val}\n",
-    diff.DELETED: "{ind}- {key}:{ak}{val}\n"
+    diff.UNCHANGED: "{ind}  {key}: {val}\n",
+    diff.ADDED: "{ind}+ {key}: {val}\n",
+    diff.DELETED: "{ind}- {key}: {val}\n"
 }
-
-
-def get_ind_after_key(value) -> str:
-    """
-    Get space if value otherwise empty string.
-    Used to render dictionary values in case of an empty value.
-
-    :param value: value
-    :return: str
-    """
-    return " " if value else ""
 
 
 def get_item_value(value, indent: int) -> str:
@@ -37,7 +26,7 @@ def get_item_value(value, indent: int) -> str:
             if isinstance(v, dict):
                 temp.append(f"{ind}  {k}: {get_item_value(v, indent + 2)}\n")
             else:
-                temp.append(f"{ind}  {k}:{get_ind_after_key(v)}{v}\n")
+                temp.append(f"{ind}  {k}: {v}\n")
 
         return "{\n" + f"{''.join(temp)}{end_bracket}" + "}"
 
@@ -74,16 +63,16 @@ def get_all_values(data: OrderedDict, depth: int = 1) -> list:
             first = get_item_value(values[0], inner_depth)
             second = get_item_value(values[1], inner_depth)
             before = status_maps[diff.DELETED].format(
-                ind=ind, key=k, ak=get_ind_after_key(first), val=first
+                ind=ind, key=k, val=first
             )
             after = status_maps[diff.ADDED].format(
-                ind=ind, key=k, ak=get_ind_after_key(second), val=second
+                ind=ind, key=k, val=second
             )
             temp.append(before + after)
         else:
             val = get_item_value(values[0], inner_depth)
             temp.append(status_maps[status].format(
-                ind=ind, key=k, ak=get_ind_after_key(val), val=val
+                ind=ind, key=k, val=val
             ))
 
     return temp
