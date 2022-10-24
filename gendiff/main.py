@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 
 from gendiff.diff import get_diff
-from gendiff.views import get_json_view
+from gendiff.views.stylish import render
 
 
 def read_file(path: str) -> dict:
@@ -34,4 +34,4 @@ def generate_diff(first_file: str, second_file: str) -> str:
     first = read_file(first_file)
     second = read_file(second_file)
     diff = get_diff(first, second)
-    return get_json_view(diff)
+    return render(diff)
