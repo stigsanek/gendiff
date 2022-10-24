@@ -11,3 +11,10 @@ Compares two configuration files and shows a difference
 
 1. Install [poetry](https://python-poetry.org/).
 2. Run `make install` or `poetry install` in the project directory.
+
+## Usage
+
+### Wheel
+
+You can build the wheel for later installation in a separate virtual environment with command `make build`
+or `poetry build`.
