@@ -12,7 +12,8 @@ def main():
     args = get_args()
     result = generate_diff(
         first_file=args.first_file,
-        second_file=args.second_file
+        second_file=args.second_file,
+        out_format=args.format
     )
     print(result)
 

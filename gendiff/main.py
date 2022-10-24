@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 
 from gendiff.diff import get_diff
-from gendiff.views.stylish import render
+from gendiff.views import render_view
 
 
 def read_file(path: str) -> dict:
@@ -23,15 +23,16 @@ def read_file(path: str) -> dict:
             return yaml.safe_load(f)
 
 
-def generate_diff(first_file: str, second_file: str) -> str:
+def generate_diff(first_file: str, second_file: str, out_format: str) -> str:
     """
     Compares two configuration files and return result string
 
     :param first_file: path to first file
     :param second_file: path to second file
+    :param out_format: output format
     :return: str
     """
     first = read_file(first_file)
     second = read_file(second_file)
     diff = get_diff(first, second)
-    return render(diff)
+    return render_view(diff=diff, out_format=out_format)

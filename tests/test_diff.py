@@ -81,7 +81,8 @@ def test_generate_diff_json(path):
 
     got = generate_diff(
         first_file=str(path / "first.json"),
-        second_file=str(path / "second.json")
+        second_file=str(path / "second.json"),
+        out_format="stylish"
     )
 
     assert got == expected
@@ -99,7 +100,8 @@ def test_generate_diff_yml(path):
 
     got = generate_diff(
         first_file=str(path / "first.yml"),
-        second_file=str(path / "second.yml")
+        second_file=str(path / "second.yml"),
+        out_format="stylish"
     )
 
     assert got == expected
