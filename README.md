@@ -5,7 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/308bfcb1ebd5980a7e7e/maintainability)](https://codeclimate.com/github/stigsanek/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/308bfcb1ebd5980a7e7e/test_coverage)](https://codeclimate.com/github/stigsanek/python-project-50/test_coverage)
 
-Generate diff is a tool that determines the difference between two data structures.
+"Generate diff" is a tool that determines the difference between two data structures.
 
 Features:
 
