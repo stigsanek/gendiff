@@ -33,7 +33,12 @@ Property 'verbose' was added with value: true
 ### Wheel
 
 You can build the wheel for later installation in a separate virtual environment with command `make build`
-or `poetry build`.
+or `poetry build`. After installing the package in the virtual environment, the games can be launched using the
+command:
+
+```
+gendiff filepath1.json filepath2.yml
+```
 
 ## Example formats
 
