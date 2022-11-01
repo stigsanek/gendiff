@@ -33,7 +33,7 @@ def generate_diff(
 
     :param first_file: path to first file
     :param second_file: path to second file
-    :param out_format: output format
+    :param out_format: (optional) output format
     :return: str
     """
     first = read_file(first_file)
