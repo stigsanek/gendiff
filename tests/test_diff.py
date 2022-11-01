@@ -20,7 +20,7 @@ def read_file(file_path) -> str:
         return f.read().strip()
 
 
-@pytest.mark.parametrize("path", [SIMPLE, NESTED])
+@pytest.mark.parametrize(argnames="path", argvalues=[SIMPLE, NESTED])
 def test_generate_diff_stylish(path: Path):
     """
     Test for generate_diff function by format 'stylish'
@@ -46,7 +46,7 @@ def test_generate_diff_stylish(path: Path):
     assert got_yml == expected
 
 
-@pytest.mark.parametrize("path", [SIMPLE, NESTED])
+@pytest.mark.parametrize(argnames="path", argvalues=[SIMPLE, NESTED])
 def test_generate_diff_plain(path: Path):
     """
     Test for generate_diff function by format 'plain'
@@ -72,7 +72,7 @@ def test_generate_diff_plain(path: Path):
     assert got_yml == expected
 
 
-@pytest.mark.parametrize("path", [SIMPLE, NESTED])
+@pytest.mark.parametrize(argnames="path", argvalues=[SIMPLE, NESTED])
 def test_generate_diff_json(path: Path):
     """
     Test for generate_diff function by format 'json'
