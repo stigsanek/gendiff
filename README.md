@@ -5,6 +5,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/308bfcb1ebd5980a7e7e/maintainability)](https://codeclimate.com/github/stigsanek/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/308bfcb1ebd5980a7e7e/test_coverage)](https://codeclimate.com/github/stigsanek/python-project-50/test_coverage)
 
+## Description
+
 "Generate diff" is a tool that determines the difference between two data structures.
 
 Features:
@@ -14,38 +16,52 @@ Features:
 
 ## Install
 
-1. Install [poetry](https://python-poetry.org/).
-2. Run `make install` or `poetry install` in the project directory.
+### Python
+
+Before installing the package, you need to make sure that you have Python version 3.8 or higher installed.
+
+```bash
+>> python --version
+Python 3.8.0+
+```
+
+If you don't have Python installed, you can download and install it
+from [the official Python website](https://www.python.org/downloads/).
+
+### Poetry
+
+The project uses the Poetry manager. Poetry is a tool for dependency management and packaging in Python. It allows you
+to declare the libraries your project depends on and it will manage (install/update) them for you. You can read more
+about this tool on [the official Poetry website](https://python-poetry.org/)
+
+### Package
+
+To work with the package, you need to clone the repository to your computer. This is done using the `git clone` command.
+Clone the project on the command line:
+
+```bash
+# clone via HTTPS:
+>> git clone https://github.com/stigsanek/python-project-50.git
+# clone via SSH:
+>> git@github.com:stigsanek/python-project-50.git
+```
+
+It remains to move to the directory and install the package:
+
+```bash
+>> cd python-project-50
+>> poetry build
+>> python -m pip install --user dist/*.whl
+```
+
+Finally, we can move on to using the project functionality!
 
 ## Usage
 
-### From project
+### Plain format
 
-```
-poetry run gendiff --format plain filepath1.json filepath2.yml
-
-Property 'follow' was removed
-Property 'proxy' was removed
-Property 'timeout' was updated. From 50 to 20
-Property 'verbose' was added with value: true
-```
-
-### Wheel
-
-You can build the wheel for later installation in a separate virtual environment with command `make build`
-or `poetry build`. After installing the package in the virtual environment, the games can be launched using the
-command:
-
-```
-gendiff filepath1.json filepath2.yml
-```
-
-## Example formats
-
-### Plain
-
-```
-gendiff --format plain filepath1.json filepath2.yml
+```bash
+>> gendiff --format plain filepath1.json filepath2.yml
 
 Property 'follow' was removed
 Property 'proxy' was removed
@@ -53,10 +69,10 @@ Property 'timeout' was updated. From 50 to 20
 Property 'verbose' was added with value: true
 ```
 
-### Stylish
+### Stylish format
 
-```
-gendiff --format stylish filepath1.json filepath2.yml
+```bash
+>> gendiff --format stylish filepath1.json filepath2.yml
 
 {
   - follow: false
@@ -68,10 +84,10 @@ gendiff --format stylish filepath1.json filepath2.yml
 }
 ```
 
-### Json
+### Json format
 
-```
-gendiff --format json filepath1.json filepath2.yml
+```bash
+>> gendiff --format json filepath1.json filepath2.yml
 
 {
     "follow": [
@@ -97,3 +113,12 @@ gendiff --format json filepath1.json filepath2.yml
     ]
 }
 ```
+
+## Development
+
+### Useful commands
+
+* `make install` - install all dependencies in the environment.
+* `make build` - build the wheel.
+* `make lint` - checking code with linter.
+* `make test` - run tests.
