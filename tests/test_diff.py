@@ -9,15 +9,26 @@ SIMPLE = FIXTURES / "simple"
 NESTED = FIXTURES / "nested"
 
 
+def read_file(file_path) -> str:
+    """
+    Read file
+
+    :param file_path: file path
+    :return: str
+    """
+    with open(file=file_path, encoding="utf-8") as f:
+        return f.read().strip()
+
+
 @pytest.mark.parametrize("path", [SIMPLE, NESTED])
-def test_generate_diff_stylish(path):
+def test_generate_diff_stylish(path: Path):
     """
     Test for generate_diff function by format 'stylish'
 
+    :param path: fixtures path
     :return:
     """
-    with open(file=path / "result_stylish.txt", encoding="utf-8") as f:
-        expected = f.read().strip()
+    expected = read_file(path / "result_stylish.txt")
 
     got_json = generate_diff(
         first_file=str(path / "first.json"),
@@ -36,14 +47,14 @@ def test_generate_diff_stylish(path):
 
 
 @pytest.mark.parametrize("path", [SIMPLE, NESTED])
-def test_generate_diff_plain(path):
+def test_generate_diff_plain(path: Path):
     """
     Test for generate_diff function by format 'plain'
 
+    :param path: fixtures path
     :return:
     """
-    with open(file=path / "result_plain.txt", encoding="utf-8") as f:
-        expected = f.read().strip()
+    expected = read_file(path / "result_plain.txt")
 
     got_json = generate_diff(
         first_file=str(path / "first.json"),
@@ -62,14 +73,14 @@ def test_generate_diff_plain(path):
 
 
 @pytest.mark.parametrize("path", [SIMPLE, NESTED])
-def test_generate_diff_json(path):
+def test_generate_diff_json(path: Path):
     """
     Test for generate_diff function by format 'json'
 
+    :param path: fixtures path
     :return:
     """
-    with open(file=path / "result_json.txt", encoding="utf-8") as f:
-        expected = f.read().strip()
+    expected = read_file(path / "result_json.txt")
 
     got_json = generate_diff(
         first_file=str(path / "first.json"),
