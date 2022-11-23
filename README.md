@@ -1,9 +1,8 @@
 # Generate diff
 
-[![Github Actions Status](https://github.com/stigsanek/python-project-50/workflows/python-ci/badge.svg)](https://github.com/stigsanek/python-project-50/actions)
-[![Actions Status](https://github.com/stigsanek/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/stigsanek/python-project-50/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/308bfcb1ebd5980a7e7e/maintainability)](https://codeclimate.com/github/stigsanek/python-project-50/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/308bfcb1ebd5980a7e7e/test_coverage)](https://codeclimate.com/github/stigsanek/python-project-50/test_coverage)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/stigsanek/gendiff/python-ci)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/stigsanek/gendiff)
+![Code Climate coverage](https://img.shields.io/codeclimate/coverage/stigsanek/gendiff)
 
 ## Description
 
@@ -41,15 +40,15 @@ Clone the project on the command line:
 
 ```bash
 # clone via HTTPS:
->> git clone https://github.com/stigsanek/python-project-50.git
+>> git clone https://github.com/stigsanek/gendiff.git
 # clone via SSH:
->> git@github.com:stigsanek/python-project-50.git
+>> git@github.com:stigsanek/gendiff.git
 ```
 
 It remains to move to the directory and install the package:
 
 ```bash
->> cd python-project-50
+>> cd gendiff
 >> poetry build
 >> python -m pip install --user dist/*.whl
 ```
