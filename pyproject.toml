@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "hexlet-code"
+name = "gendiff"
 version = "0.1.0"
 description = "Compares two configuration files and shows a difference"
 authors = ["stigsanek <stigsanek@yandex.ru>"]
-repository = "https://github.com/stigsanek/python-project-50"
+repository = "https://github.com/stigsanek/gendiff"
 readme = "README.md"
 packages = [{include = "gendiff"}]
 
