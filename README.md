@@ -1,6 +1,6 @@
 # Generate diff
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/stigsanek/gendiff/python-ci)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stigsanek/gendiff/pyci.yml?branch=main)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/stigsanek/gendiff)
 ![Code Climate coverage](https://img.shields.io/codeclimate/coverage/stigsanek/gendiff)
 
